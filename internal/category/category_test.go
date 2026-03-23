@@ -77,7 +77,7 @@ func TestClassify(t *testing.T) {
 	}
 }
 
-func TestGetEmoji(t *testing.T) {
+func TestGetSymbol(t *testing.T) {
 	tests := []struct {
 		cat      Category
 		expected string
@@ -93,9 +93,9 @@ func TestGetEmoji(t *testing.T) {
 	}
 
 	for _, tt := range tests {
-		got := GetEmoji(tt.cat)
+		got := GetSymbol(tt.cat)
 		if got != tt.expected {
-			t.Errorf("GetEmoji(%q): got %q, want %q", tt.cat, got, tt.expected)
+			t.Errorf("GetSymbol(%q): got %q, want %q", tt.cat, got, tt.expected)
 		}
 	}
 }

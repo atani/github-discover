@@ -48,7 +48,7 @@ func runSearch(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to initialize cache: %w", err)
 	}
 
-	cacheKey := fmt.Sprintf("%s%s_%s_%s", cache.SearchPrefix, args[0], searchLanguage, searchSort)
+	cacheKey := fmt.Sprintf("%s%s_%s_%s_%d", cache.SearchPrefix, args[0], searchLanguage, searchSort, searchLimit)
 
 	var result *github.SearchResult
 

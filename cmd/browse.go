@@ -67,7 +67,7 @@ func printCategoryOverview() {
 	fmt.Println()
 
 	for _, cat := range category.AllCategories {
-		emoji := category.GetEmoji(cat)
+		emoji := category.GetSymbol(cat)
 		name := i18n.T("category." + string(cat))
 		fmt.Printf("  %s %s  %s\n",
 			emoji,
@@ -98,7 +98,7 @@ func browseCategoryRepos(cat category.Category) error {
 		return fmt.Errorf("failed to initialize cache: %w", err)
 	}
 
-	cacheKey := fmt.Sprintf("%sbrowse_%s", cache.SearchPrefix, cat)
+	cacheKey := fmt.Sprintf("%sbrowse_%s_%d", cache.SearchPrefix, cat, browseLimit)
 
 	var result *github.SearchResult
 
@@ -122,7 +122,7 @@ func browseCategoryRepos(cat category.Category) error {
 
 render:
 	rows := buildRows(result.Items, browseLimit)
-	title := category.GetEmoji(cat) + " " + i18n.T("category."+string(cat))
+	title := category.GetSymbol(cat) + " " + i18n.T("category."+string(cat))
 	ui.PrintRepoTable(title, rows, "")
 
 	return nil

@@ -66,7 +66,7 @@ func Classify(topics []string, description string) Category {
 	return bestCategory
 }
 
-func GetEmoji(cat Category) string {
+func GetSymbol(cat Category) string {
 	switch cat {
 	case CategoryCLI:
 		return ">"

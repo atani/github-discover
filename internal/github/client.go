@@ -84,7 +84,7 @@ func (c *Client) SearchRepositories(query string, sort string, order string, per
 
 // GetRepository fetches detailed information about a specific repository.
 func (c *Client) GetRepository(owner, repo string) (*Repository, error) {
-	reqURL := fmt.Sprintf("%s/repos/%s/%s", c.baseURL, owner, repo)
+	reqURL := fmt.Sprintf("%s/repos/%s/%s", c.baseURL, url.PathEscape(owner), url.PathEscape(repo))
 	req, err := http.NewRequest("GET", reqURL, nil)
 	if err != nil {
 		return nil, err

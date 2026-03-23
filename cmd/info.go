@@ -37,7 +37,7 @@ func runInfo(cmd *cobra.Command, args []string) error {
 
 	repo, err := client.GetRepository(parts[0], parts[1])
 	if err != nil {
-		return fmt.Errorf("%s", i18n.T("error.not_found", args[0]))
+		return fmt.Errorf("%s: %w", i18n.T("error.not_found", args[0]), err)
 	}
 
 	printRepoInfo(repo)
