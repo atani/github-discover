@@ -44,7 +44,7 @@ func TestClient_do_setsHeaders(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestClient_do_noAuthWithoutToken(t *testing.T) {
@@ -62,7 +62,7 @@ func TestClient_do_noAuthWithoutToken(t *testing.T) {
 	if err != nil {
 		t.Fatalf("unexpected error: %v", err)
 	}
-	resp.Body.Close()
+	_ = resp.Body.Close()
 }
 
 func TestClient_SearchRepositories(t *testing.T) {

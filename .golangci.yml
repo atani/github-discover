@@ -1,0 +1,13 @@
+linters-settings:
+  errcheck:
+    exclude-functions:
+      - (io.Closer).Close
+      - (*net/http.Response.Body).Close
+      - (net/http.ResponseWriter).Write
+
+linters:
+  enable:
+    - errcheck
+    - govet
+    - staticcheck
+    - unused
