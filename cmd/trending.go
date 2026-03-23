@@ -42,7 +42,7 @@ func runTrending(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to initialize cache: %w", err)
 	}
 
-	cacheKey := fmt.Sprintf("%strending_%s_%s_%d", cache.TrendPrefix, trendSince, trendLanguage, trendCount)
+	cacheKey := fmt.Sprintf("%strending_%s_%s_%s_%d", cache.TrendPrefix, trendSince, trendLanguage, stars, trendCount)
 
 	var result *github.SearchResult
 
@@ -52,7 +52,7 @@ func runTrending(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	result, err = client.GetTrendingByStars(trendLanguage, trendSince, trendCount)
+	result, err = client.GetTrendingByStars(trendLanguage, trendSince, trendCount, starsQuery())
 	if err != nil {
 		return fmt.Errorf("failed to get trending repositories: %w", err)
 	}

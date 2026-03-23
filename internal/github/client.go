@@ -134,7 +134,8 @@ func (c *Client) GetTrending(language string, since string, perPage int) (*Searc
 }
 
 // GetTrendingByStars fetches repos that gained the most stars recently.
-func (c *Client) GetTrendingByStars(language string, since string, perPage int) (*SearchResult, error) {
+// starsFilter overrides the default "stars:>10" if non-empty (e.g. "stars:1000..2000").
+func (c *Client) GetTrendingByStars(language string, since string, perPage int, starsFilter string) (*SearchResult, error) {
 	var dateRange string
 	now := time.Now()
 
@@ -149,7 +150,11 @@ func (c *Client) GetTrendingByStars(language string, since string, perPage int) 
 
 	var queryParts []string
 	queryParts = append(queryParts, fmt.Sprintf("pushed:>%s", dateRange))
-	queryParts = append(queryParts, "stars:>10")
+	if starsFilter != "" {
+		queryParts = append(queryParts, starsFilter)
+	} else {
+		queryParts = append(queryParts, "stars:>10")
+	}
 	if language != "" {
 		queryParts = append(queryParts, fmt.Sprintf("language:%s", language))
 	}

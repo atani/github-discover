@@ -11,6 +11,7 @@ import (
 var (
 	lang    string
 	refresh bool
+	stars   string
 
 	// githubBaseURL allows overriding the GitHub API base URL for testing.
 	githubBaseURL string
@@ -47,7 +48,17 @@ func newGitHubClient() *github.Client {
 	return github.NewClient(os.Getenv("GITHUB_TOKEN"))
 }
 
+// starsQuery returns a GitHub search qualifier for star range filtering.
+// Examples: "1000..2000" → "stars:1000..2000", ">500" → "stars:>500", "100.." → "stars:>=100"
+func starsQuery() string {
+	if stars == "" {
+		return ""
+	}
+	return "stars:" + stars
+}
+
 func init() {
 	rootCmd.PersistentFlags().StringVar(&lang, "lang", "", "Language (en, ja)")
 	rootCmd.PersistentFlags().BoolVar(&refresh, "refresh", false, "Refresh cache")
+	rootCmd.PersistentFlags().StringVar(&stars, "stars", "", "Star range filter (e.g. 100..1000, >500, 1000..2000)")
 }

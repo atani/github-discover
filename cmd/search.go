@@ -41,6 +41,9 @@ func runSearch(cmd *cobra.Command, args []string) error {
 	if searchLanguage != "" {
 		query += " language:" + searchLanguage
 	}
+	if sq := starsQuery(); sq != "" {
+		query += " " + sq
+	}
 
 	client := newGitHubClient()
 	c, err := cache.New()
@@ -48,7 +51,7 @@ func runSearch(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to initialize cache: %w", err)
 	}
 
-	cacheKey := fmt.Sprintf("%s%s_%s_%s_%d", cache.SearchPrefix, args[0], searchLanguage, searchSort, searchLimit)
+	cacheKey := fmt.Sprintf("%s%s_%s_%s_%s_%d", cache.SearchPrefix, args[0], searchLanguage, searchSort, stars, searchLimit)
 
 	var result *github.SearchResult
 

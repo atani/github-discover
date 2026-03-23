@@ -235,7 +235,7 @@ func TestClient_GetTrendingByStars(t *testing.T) {
 			})
 			defer server.Close()
 
-			result, err := client.GetTrendingByStars(tc.language, tc.since, 10)
+			result, err := client.GetTrendingByStars(tc.language, tc.since, 10, "")
 			if err != nil {
 				t.Fatalf("unexpected error: %v", err)
 			}

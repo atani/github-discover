@@ -44,7 +44,7 @@ func runRandom(cmd *cobra.Command, args []string) error {
 	}
 
 	// Fetch a pool of popular repos to pick from
-	cacheKey := fmt.Sprintf("%srandom_pool_%s", cache.SearchPrefix, randomLanguage)
+	cacheKey := fmt.Sprintf("%srandom_pool_%s_%s", cache.SearchPrefix, randomLanguage, stars)
 
 	var result *github.SearchResult
 
@@ -55,7 +55,10 @@ func runRandom(cmd *cobra.Command, args []string) error {
 	}
 
 	{
-		query := "stars:>100"
+		query := starsQuery()
+		if query == "" {
+			query = "stars:>100"
+		}
 		if randomLanguage != "" {
 			query += " language:" + randomLanguage
 		}

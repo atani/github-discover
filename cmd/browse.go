@@ -3,6 +3,7 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/atani/github-discover/internal/cache"
 	"github.com/atani/github-discover/internal/category"
@@ -98,7 +99,7 @@ func browseCategoryRepos(cat category.Category) error {
 		return fmt.Errorf("failed to initialize cache: %w", err)
 	}
 
-	cacheKey := fmt.Sprintf("%sbrowse_%s_%d", cache.SearchPrefix, cat, browseLimit)
+	cacheKey := fmt.Sprintf("%sbrowse_%s_%s_%d", cache.SearchPrefix, cat, stars, browseLimit)
 
 	var result *github.SearchResult
 
@@ -110,6 +111,24 @@ func browseCategoryRepos(cat category.Category) error {
 
 	{
 		query := categoryQueries[cat]
+		if sq := starsQuery(); sq != "" {
+			// Replace the default stars qualifier with user-specified one
+			for k, v := range categoryQueries {
+				if k == cat {
+					// Remove existing stars: qualifier
+					parts := strings.Fields(v)
+					var filtered []string
+					for _, p := range parts {
+						if !strings.HasPrefix(p, "stars:") {
+							filtered = append(filtered, p)
+						}
+					}
+					filtered = append(filtered, sq)
+					query = strings.Join(filtered, " ")
+					break
+				}
+			}
+		}
 		result, err = client.SearchRepositories(query, "stars", "desc", browseLimit)
 		if err != nil {
 			return fmt.Errorf("failed to browse category: %w", err)
