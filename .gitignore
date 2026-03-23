@@ -1,3 +1,4 @@
 github-discover
 dist/
 .DS_Store
+demo/node_modules/

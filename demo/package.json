@@ -1,0 +1,25 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render": "remotion render src/index.ts GithubDiscoverDemo ../assets/demo.mp4",
+    "render-gif": "remotion render src/index.ts GithubDiscoverDemo ../assets/demo.gif --image-format png"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/bundler": "4.0.438",
+    "@remotion/cli": "4.0.438",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "remotion": "4.0.438",
+    "typescript": "5.9.3"
+  }
+}

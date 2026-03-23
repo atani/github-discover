@@ -7,23 +7,7 @@
 
 Discover trending and interesting GitHub repositories from your terminal.
 
-```
-$ github-discover trending -n 5
-
-Trending Repositories (weekly)
-────────────────────────────────────────────────────────────────────────────────
-  1. freeCodeCamp/freeCodeCamp                ★ 438.7k  [TypeScript]
-     freeCodeCamp.org's open-source codebase and curriculum.
-  2. public-apis/public-apis                  ★ 414.4k  [Python]
-     A collective list of free APIs
-  3. EbookFoundation/free-programming-books   ★ 384.4k  [Python]
-     Freely available programming books
-  4. kamranahmedse/developer-roadmap          ★ 351.5k  [TypeScript]
-     Interactive roadmaps, guides and other educational content
-  5. donnemartin/system-design-primer         ★ 339.9k  [Python]
-     Learn how to design large-scale systems.
-────────────────────────────────────────────────────────────────────────────────
-```
+![demo](assets/demo.gif)
 
 ## Features
 
