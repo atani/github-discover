@@ -1,6 +1,29 @@
 # github-discover
 
+[![CI](https://github.com/atani/github-discover/actions/workflows/ci.yml/badge.svg)](https://github.com/atani/github-discover/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/atani/github-discover)](https://goreportcard.com/report/github.com/atani/github-discover)
+[![Go Reference](https://pkg.go.dev/badge/github.com/atani/github-discover.svg)](https://pkg.go.dev/github.com/atani/github-discover)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Discover trending and interesting GitHub repositories from your terminal.
+
+```
+$ github-discover trending -n 5
+
+Trending Repositories (weekly)
+────────────────────────────────────────────────────────────────────────────────
+  1. freeCodeCamp/freeCodeCamp                ★ 438.7k  [TypeScript]
+     freeCodeCamp.org's open-source codebase and curriculum.
+  2. public-apis/public-apis                  ★ 414.4k  [Python]
+     A collective list of free APIs
+  3. EbookFoundation/free-programming-books   ★ 384.4k  [Python]
+     Freely available programming books
+  4. kamranahmedse/developer-roadmap          ★ 351.5k  [TypeScript]
+     Interactive roadmaps, guides and other educational content
+  5. donnemartin/system-design-primer         ★ 339.9k  [Python]
+     Learn how to design large-scale systems.
+────────────────────────────────────────────────────────────────────────────────
+```
 
 ## Features
 

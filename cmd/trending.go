@@ -3,7 +3,6 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/atani/github-discover/internal/cache"
 	"github.com/atani/github-discover/internal/github"
@@ -37,7 +36,7 @@ func runTrending(cmd *cobra.Command, args []string) error {
 		i18n.SetLanguage(lang)
 	}
 
-	client := github.NewClient(os.Getenv("GITHUB_TOKEN"))
+	client := newGitHubClient()
 	c, err := cache.New()
 	if err != nil {
 		return fmt.Errorf("failed to initialize cache: %w", err)

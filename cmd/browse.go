@@ -3,7 +3,6 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/atani/github-discover/internal/cache"
 	"github.com/atani/github-discover/internal/category"
@@ -93,7 +92,7 @@ var categoryQueries = map[category.Category]string{
 }
 
 func browseCategoryRepos(cat category.Category) error {
-	client := github.NewClient(os.Getenv("GITHUB_TOKEN"))
+	client := newGitHubClient()
 	c, err := cache.New()
 	if err != nil {
 		return fmt.Errorf("failed to initialize cache: %w", err)

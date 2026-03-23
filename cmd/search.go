@@ -3,7 +3,6 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 
 	"github.com/atani/github-discover/internal/cache"
 	"github.com/atani/github-discover/internal/github"
@@ -43,7 +42,7 @@ func runSearch(cmd *cobra.Command, args []string) error {
 		query += " language:" + searchLanguage
 	}
 
-	client := github.NewClient(os.Getenv("GITHUB_TOKEN"))
+	client := newGitHubClient()
 	c, err := cache.New()
 	if err != nil {
 		return fmt.Errorf("failed to initialize cache: %w", err)

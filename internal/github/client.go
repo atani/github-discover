@@ -10,17 +10,27 @@ import (
 	"time"
 )
 
-const baseURL = "https://api.github.com"
+const defaultBaseURL = "https://api.github.com"
 
 type Client struct {
 	httpClient *http.Client
 	token      string
+	baseURL    string
 }
 
 func NewClient(token string) *Client {
 	return &Client{
 		httpClient: &http.Client{Timeout: 30 * time.Second},
 		token:      token,
+		baseURL:    defaultBaseURL,
+	}
+}
+
+// NewTestClient creates a client pointing to a custom base URL (for testing).
+func NewTestClient(baseURL string) *Client {
+	return &Client{
+		httpClient: &http.Client{Timeout: 5 * time.Second},
+		baseURL:    baseURL,
 	}
 }
 
@@ -47,7 +57,7 @@ func (c *Client) SearchRepositories(query string, sort string, order string, per
 		params.Set("per_page", fmt.Sprintf("%d", perPage))
 	}
 
-	reqURL := fmt.Sprintf("%s/search/repositories?%s", baseURL, params.Encode())
+	reqURL := fmt.Sprintf("%s/search/repositories?%s", c.baseURL, params.Encode())
 	req, err := http.NewRequest("GET", reqURL, nil)
 	if err != nil {
 		return nil, err
@@ -74,7 +84,7 @@ func (c *Client) SearchRepositories(query string, sort string, order string, per
 
 // GetRepository fetches detailed information about a specific repository.
 func (c *Client) GetRepository(owner, repo string) (*Repository, error) {
-	reqURL := fmt.Sprintf("%s/repos/%s/%s", baseURL, owner, repo)
+	reqURL := fmt.Sprintf("%s/repos/%s/%s", c.baseURL, owner, repo)
 	req, err := http.NewRequest("GET", reqURL, nil)
 	if err != nil {
 		return nil, err

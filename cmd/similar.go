@@ -3,7 +3,6 @@ package cmd
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/atani/github-discover/internal/cache"
@@ -38,7 +37,7 @@ func runSimilar(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("please specify repository as owner/repo (e.g. golang/go)")
 	}
 
-	client := github.NewClient(os.Getenv("GITHUB_TOKEN"))
+	client := newGitHubClient()
 	c, err := cache.New()
 	if err != nil {
 		return fmt.Errorf("failed to initialize cache: %w", err)

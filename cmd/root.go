@@ -4,12 +4,16 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/atani/github-discover/internal/github"
 	"github.com/spf13/cobra"
 )
 
 var (
 	lang    string
 	refresh bool
+
+	// githubBaseURL allows overriding the GitHub API base URL for testing.
+	githubBaseURL string
 )
 
 var rootCmd = &cobra.Command{
@@ -34,6 +38,13 @@ func Execute() {
 
 func SetVersion(v string) {
 	rootCmd.Version = v
+}
+
+func newGitHubClient() *github.Client {
+	if githubBaseURL != "" {
+		return github.NewTestClient(githubBaseURL)
+	}
+	return github.NewClient(os.Getenv("GITHUB_TOKEN"))
 }
 
 func init() {

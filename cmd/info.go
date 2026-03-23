@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"os"
 	"strings"
 
 	"github.com/atani/github-discover/internal/github"
@@ -34,7 +33,7 @@ func runInfo(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("please specify repository as owner/repo (e.g. golang/go)")
 	}
 
-	client := github.NewClient(os.Getenv("GITHUB_TOKEN"))
+	client := newGitHubClient()
 
 	repo, err := client.GetRepository(parts[0], parts[1])
 	if err != nil {
