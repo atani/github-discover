@@ -60,12 +60,12 @@ func setupMockGitHub(t *testing.T) *httptest.Server {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
 
-		switch {
-		case r.URL.Path == "/search/repositories":
+		switch r.URL.Path {
+		case "/search/repositories":
 			_ = json.NewEncoder(w).Encode(searchResult)
-		case r.URL.Path == "/repos/test/alpha":
+		case "/repos/test/alpha":
 			_ = json.NewEncoder(w).Encode(repoDetail)
-		case r.URL.Path == "/repos/test/notfound":
+		case "/repos/test/notfound":
 			w.WriteHeader(http.StatusNotFound)
 			_, _ = w.Write([]byte(`{"message":"Not Found"}`))
 		default:
@@ -91,7 +91,7 @@ func withMockServer(t *testing.T, fn func()) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.RemoveAll(tmpDir)
+	defer func() { _ = os.RemoveAll(tmpDir) }()
 
 	// Force refresh to avoid cached stale data
 	oldRefresh := refresh

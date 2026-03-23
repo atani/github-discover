@@ -63,7 +63,7 @@ func TestPrintRepoTable(t *testing.T) {
 
 	PrintRepoTable("Test Title", rows, "A helpful tip")
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = old
 
 	var buf bytes.Buffer
@@ -90,7 +90,7 @@ func TestPrintRepoTable_Empty(t *testing.T) {
 
 	PrintRepoTable("Empty Table", nil, "")
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = old
 
 	var buf bytes.Buffer
@@ -112,7 +112,7 @@ func TestPrintRepoTable_NoTip(t *testing.T) {
 	}
 	PrintRepoTable("Title", rows, "")
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = old
 
 	var buf bytes.Buffer
@@ -134,7 +134,7 @@ func TestPrintRepoTable_NoLanguage(t *testing.T) {
 	}
 	PrintRepoTable("Title", rows, "")
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = old
 
 	var buf bytes.Buffer
