@@ -231,7 +231,7 @@ func TestExecute_Version(t *testing.T) {
 	rootCmd.SetArgs([]string{"--version"})
 	_ = rootCmd.Execute()
 
-	w.Close()
+	_ = w.Close()
 	os.Stdout = old
 
 	var buf bytes.Buffer
