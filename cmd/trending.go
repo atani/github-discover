@@ -42,7 +42,7 @@ func runTrending(cmd *cobra.Command, args []string) error {
 		return fmt.Errorf("failed to initialize cache: %w", err)
 	}
 
-	cacheKey := fmt.Sprintf("%strending_%s_%s", cache.TrendPrefix, trendSince, trendLanguage)
+	cacheKey := fmt.Sprintf("%strending_%s_%s_%d", cache.TrendPrefix, trendSince, trendLanguage, trendCount)
 
 	var result *github.SearchResult
 

@@ -46,13 +46,13 @@ func runSimilar(cmd *cobra.Command, args []string) error {
 	// Fetch the source repository to get its topics and language
 	repo, err := client.GetRepository(parts[0], parts[1])
 	if err != nil {
-		return fmt.Errorf("%s", i18n.T("error.not_found", args[0]))
+		return fmt.Errorf("%s: %w", i18n.T("error.not_found", args[0]), err)
 	}
 
 	// Build a search query from the repo's topics and language
 	query := buildSimilarQuery(repo)
 
-	cacheKey := fmt.Sprintf("%ssimilar_%s_%s", cache.SearchPrefix, parts[0], parts[1])
+	cacheKey := fmt.Sprintf("%ssimilar_%s_%s_%d", cache.SearchPrefix, parts[0], parts[1], similarLimit)
 
 	var result *github.SearchResult
 

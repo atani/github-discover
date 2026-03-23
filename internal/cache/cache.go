@@ -3,6 +3,7 @@ package cache
 import (
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -25,15 +26,20 @@ func New() (*Cache, error) {
 	}
 
 	dir := filepath.Join(cacheDir, "github-discover")
-	if err := os.MkdirAll(dir, 0o755); err != nil {
+	if err := os.MkdirAll(dir, 0o700); err != nil {
 		return nil, err
 	}
 
 	return &Cache{dir: dir}, nil
 }
 
+func sanitizeKey(key string) string {
+	r := strings.NewReplacer("/", "_", "\\", "_", " ", "_", ":", "_")
+	return r.Replace(key)
+}
+
 func (c *Cache) Get(key string, ttl time.Duration) ([]byte, bool) {
-	path := filepath.Join(c.dir, key+".json")
+	path := filepath.Join(c.dir, sanitizeKey(key)+".json")
 	info, err := os.Stat(path)
 	if err != nil {
 		return nil, false
@@ -52,6 +58,6 @@ func (c *Cache) Get(key string, ttl time.Duration) ([]byte, bool) {
 }
 
 func (c *Cache) Set(key string, data []byte) error {
-	path := filepath.Join(c.dir, key+".json")
-	return os.WriteFile(path, data, 0o644)
+	path := filepath.Join(c.dir, sanitizeKey(key)+".json")
+	return os.WriteFile(path, data, 0o600)
 }

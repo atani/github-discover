@@ -70,6 +70,9 @@ func runRandom(cmd *cobra.Command, args []string) error {
 	}
 
 pick:
+	if len(result.Items) == 0 {
+		return fmt.Errorf("no repositories found")
+	}
 	picked := pickRandomRepos(result.Items, randomCount)
 
 	if randomCount == 1 && len(picked) == 1 {
