@@ -37,12 +37,22 @@ Trending Repositories (weekly)
 
 ## Installation
 
+### Homebrew
+
 ```bash
 brew tap atani/tap
 brew install github-discover
 ```
 
-Or download the binary from [Releases](https://github.com/atani/github-discover/releases).
+### Go install
+
+```bash
+go install github.com/atani/github-discover@latest
+```
+
+### Binary download
+
+Download the binary from [Releases](https://github.com/atani/github-discover/releases).
 
 ## Usage
 
