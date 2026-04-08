@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/atani/github-discover/internal/github"
+	"github.com/atani/github-discover/internal/trending"
 	"github.com/atani/github-discover/internal/ui"
 )
 
@@ -124,6 +125,60 @@ func containsSubstr(s, substr string) bool {
 		}
 	}
 	return false
+}
+
+func TestBuildHottestRows(t *testing.T) {
+	scored := []trending.ScoredRepo{
+		{
+			Repo:     github.Repository{FullName: "fast/repo", StargazersCount: 1000, Language: "Go", Description: "A fast repo"},
+			Velocity: 142.8,
+		},
+		{
+			Repo:     github.Repository{FullName: "mid/repo", StargazersCount: 500, Language: "Rust", Description: ""},
+			Velocity: 71.4,
+		},
+	}
+
+	rows := buildHottestRows(scored, 10)
+	if len(rows) != 2 {
+		t.Fatalf("buildHottestRows: got %d rows, want 2", len(rows))
+	}
+
+	if rows[0].Rank != 1 || rows[0].Name != "fast/repo" {
+		t.Errorf("rows[0]: got %+v", rows[0])
+	}
+
+	// Description should include velocity tag
+	if !containsString(rows[0].Description, "142.8 stars/day") {
+		t.Errorf("rows[0].Description missing velocity: %q", rows[0].Description)
+	}
+
+	// Repo with empty description should still have velocity tag
+	if !containsString(rows[1].Description, "71.4 stars/day") {
+		t.Errorf("rows[1].Description missing velocity: %q", rows[1].Description)
+	}
+}
+
+func TestBuildHottestRows_Limit(t *testing.T) {
+	scored := make([]trending.ScoredRepo, 10)
+	for i := range scored {
+		scored[i] = trending.ScoredRepo{
+			Repo:     github.Repository{FullName: "test/repo"},
+			Velocity: float64(10 - i),
+		}
+	}
+
+	rows := buildHottestRows(scored, 3)
+	if len(rows) != 3 {
+		t.Fatalf("buildHottestRows with limit 3: got %d rows", len(rows))
+	}
+}
+
+func TestBuildHottestRows_Empty(t *testing.T) {
+	rows := buildHottestRows(nil, 10)
+	if len(rows) != 0 {
+		t.Errorf("buildHottestRows(nil): got %d rows, want 0", len(rows))
+	}
 }
 
 func TestSetVersion(t *testing.T) {
