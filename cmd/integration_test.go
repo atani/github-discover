@@ -221,6 +221,36 @@ func TestSimilarCommand_Execute_InvalidFormat(t *testing.T) {
 	})
 }
 
+func TestHottestCommand_Execute(t *testing.T) {
+	withMockServer(t, func() {
+		rootCmd.SetArgs([]string{"hottest", "-n", "5"})
+		err := rootCmd.Execute()
+		if err != nil {
+			t.Fatalf("hottest command failed: %v", err)
+		}
+	})
+}
+
+func TestHottestCommand_Execute_VelocityMode(t *testing.T) {
+	withMockServer(t, func() {
+		rootCmd.SetArgs([]string{"hottest", "-n", "5", "--mode", "velocity"})
+		err := rootCmd.Execute()
+		if err != nil {
+			t.Fatalf("hottest velocity mode failed: %v", err)
+		}
+	})
+}
+
+func TestHottestCommand_Execute_WithLanguage(t *testing.T) {
+	withMockServer(t, func() {
+		rootCmd.SetArgs([]string{"hottest", "-l", "go"})
+		err := rootCmd.Execute()
+		if err != nil {
+			t.Fatalf("hottest with language failed: %v", err)
+		}
+	})
+}
+
 func TestExecute_Version(t *testing.T) {
 	SetVersion("test-version")
 
