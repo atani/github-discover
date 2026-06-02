@@ -1,6 +1,7 @@
 # github-discover
 
 [![CI](https://github.com/atani/github-discover/actions/workflows/ci.yml/badge.svg)](https://github.com/atani/github-discover/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/atani/github-discover/branch/main/graph/badge.svg)](https://codecov.io/gh/atani/github-discover)
 [![Go Report Card](https://goreportcard.com/badge/github.com/atani/github-discover)](https://goreportcard.com/report/github.com/atani/github-discover)
 [![Go Reference](https://pkg.go.dev/badge/github.com/atani/github-discover.svg)](https://pkg.go.dev/github.com/atani/github-discover)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
