@@ -18,7 +18,7 @@
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
     "react": "19.2.6",
-    "react-dom": "19.2.6",
+    "react-dom": "19.2.7",
     "remotion": "4.0.470",
     "typescript": "6.0.3"
   }
