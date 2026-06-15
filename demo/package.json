@@ -14,12 +14,12 @@
   "type": "commonjs",
   "dependencies": {
     "@remotion/bundler": "4.0.474",
-    "@remotion/cli": "4.0.470",
-    "@types/react": "19.2.15",
+    "@remotion/cli": "4.0.474",
+    "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "react": "19.2.6",
-    "react-dom": "19.2.6",
-    "remotion": "4.0.470",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "remotion": "4.0.474",
     "typescript": "6.0.3"
   }
 }
