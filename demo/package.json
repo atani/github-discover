@@ -20,6 +20,6 @@
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "remotion": "4.0.489",
-    "typescript": "6.0.3"
+    "typescript": "7.0.2"
   }
 }
