@@ -13,7 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-    "@remotion/bundler": "4.0.499",
+    "@remotion/bundler": "4.0.504",
     "@remotion/cli": "4.0.504",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.4",
