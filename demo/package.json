@@ -14,7 +14,7 @@
   "type": "commonjs",
   "dependencies": {
     "@remotion/bundler": "4.0.516",
-    "@remotion/cli": "4.0.516",
+    "@remotion/cli": "4.0.519",
     "@types/react": "19.2.18",
     "@types/react-dom": "19.2.5",
     "react": "19.2.8",
