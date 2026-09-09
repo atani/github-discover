@@ -3,7 +3,7 @@ updates:
   - package-ecosystem: "gomod"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     cooldown:
       default-days: 7
     commit-message:
@@ -15,11 +15,15 @@ updates:
   - package-ecosystem: "npm"
     directory: "/demo"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     cooldown:
       default-days: 7
     commit-message:
       prefix: "chore(deps)"
+    groups:
+      demo-dependencies:
+        applies-to: version-updates
+        patterns: ["*"]
     ignore:
       # Dependabot security updates currently open a false-positive run for
       # fast-uri even though demo/package-lock.json is already on 3.1.2.
@@ -28,7 +32,7 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "monthly"
     cooldown:
       default-days: 7
     commit-message:
